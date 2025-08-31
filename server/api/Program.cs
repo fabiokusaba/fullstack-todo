@@ -14,6 +14,7 @@ builder.Services.AddDbContext<MyDbContext>(conf =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddOpenApiDocument();
 
 builder.Services.AddCors();
 
@@ -28,5 +29,8 @@ app.UseCors(config =>
 });
 
 app.MapControllers();
+
+app.UseOpenApi();
+app.UseSwaggerUi();
 
 app.Run();
