@@ -1,5 +1,6 @@
 using api;
 using api.Exceptions;
+using api.Extensions;
 using api.Services;
 using Infrastructure.Postgres.Scaffolding;
 using Microsoft.EntityFrameworkCore;
@@ -39,5 +40,6 @@ app.MapControllers();
 
 app.UseOpenApi();
 app.UseSwaggerUi();
+await app.GenerateApiClientsFromOpenApi("/../../client/src/generated-ts-client.ts");
 
 app.Run();
