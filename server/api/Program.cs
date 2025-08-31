@@ -1,13 +1,14 @@
 using api;
 using api.Exceptions;
-using efscaffold.Entities;
+using api.Services;
 using Infrastructure.Postgres.Scaffolding;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var appOptions = builder.Services.AddAppOptions(builder.Configuration);
+
+builder.Services.AddScoped<ITodoService, TodoService>();
 
 builder.Services.AddDbContext<MyDbContext>(conf =>
 {
