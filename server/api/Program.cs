@@ -1,4 +1,5 @@
 using api;
+using api.Exceptions;
 using efscaffold.Entities;
 using Infrastructure.Postgres.Scaffolding;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,14 @@ builder.Services.AddDbContext<MyDbContext>(conf =>
 builder.Services.AddControllers();
 builder.Services.AddOpenApiDocument();
 
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 builder.Services.AddCors();
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 app.UseCors(config =>
 {
