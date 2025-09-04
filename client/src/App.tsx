@@ -40,7 +40,7 @@ function App() {
     <button onClick={() => {
       todoClient.createTodo(myForm).then(result => {
         console.log('todo was created successfully')
-        
+
         setTodos([...todos, result])
 
         setMyForm({
@@ -56,6 +56,13 @@ function App() {
     {
       todos.map(t => {
         return <div key={t.id}>
+          <input type="checkbox" checked={t.isdone} onChange={async e => {
+            const result = await todoClient.toggleTodoAsDone(t)
+            const index = todos.indexOf(t)
+            const duplicatedTodos = [...todos]
+            duplicatedTodos[index] = result
+            setTodos(duplicatedTodos)
+          }} />
           {JSON.stringify(t)}
         </div>
       })
