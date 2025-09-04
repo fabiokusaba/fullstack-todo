@@ -7,4 +7,5 @@ public interface ITodoService
 {
     Task<Todo> CreateTodo(CreateTodoDto dto);
     Task<List<Todo>> GetAllTodos();
+    Task<Todo> ToggleTodoAsDone(Todo todo);
 }

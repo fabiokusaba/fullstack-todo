@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using api.DTOs;
 using efscaffold.Entities;
 using Infrastructure.Postgres.Scaffolding;
@@ -26,5 +27,17 @@ public class TodoService(MyDbContext dbContext) : ITodoService
     public async Task<List<Todo>> GetAllTodos()
     {
         return await dbContext.Todos.ToListAsync();
+    }
+
+    public async Task<Todo> ToggleTodoAsDone(Todo todo)
+    {
+        var currentObject = await dbContext.Todos.FirstOrDefaultAsync(t => t.Id == todo.Id)
+            ?? throw new ValidationException("Todo could not be found");
+
+        currentObject.Isdone = !currentObject.Isdone;
+        dbContext.Todos.Update(currentObject);
+        await dbContext.SaveChangesAsync();
+        
+        return currentObject;
     }
 }

@@ -57,6 +57,36 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Todo"
+        ],
+        "operationId": "Todo_ToggleTodoAsDone",
+        "requestBody": {
+          "x-name": "todo",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Todo"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },

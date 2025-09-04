@@ -24,4 +24,11 @@ public class TodoController(ITodoService todoService) : ControllerBase
         var result = await todoService.CreateTodo(dto);
         return Ok(result);
     }
+
+    [HttpPut]
+    public async Task<ActionResult<Todo>> ToggleTodoAsDone([FromBody] Todo todo)
+    {
+        var result = await todoService.ToggleTodoAsDone(todo);
+        return Ok(result);
+    }
 }
